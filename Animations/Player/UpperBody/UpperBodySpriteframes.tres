@@ -1,0 +1,111 @@
+[gd_resource type="SpriteFrames" load_steps=22 format=2]
+
+[ext_resource path="res://Assets/Player/UpperBody/Running/lance_walking_r_frame_3_upper.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Player/UpperBody/Running/lance_walking_r_frame_0_upper.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Player/UpperBody/Running/lance_walking_r_frame_1_upper.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Player/UpperBody/Running/lance_walking_r_frame_4_upper.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Player/UpperBody/Running/lance_walking_r_frame_5_upper.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Player/UpperBody/Running/lance_walking_r_frame_2_upper.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Player/UpperBody/standing_upper_idle_centered.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Player/UpperBody/lance_upper_aiming_right_down.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Player/UpperBody/lance_upper_aiming_right_up.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Player/UpperBody/lance_upper_aiming_up.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Player/FullBody/InWater/swimming_02.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Player/FullBody/InWater/up_on_shore_blue.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Player/FullBody/LanceFallingR.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Player/FullBody/InWater/lance_walking_r_frame_4.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Player/FullBody/InWater/drowning_02.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Player/FullBody/InWater/firing_water_right_02.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Player/FullBody/InWater/firing_water_up_01.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Player/FullBody/InWater/firing_water_up_02.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Player/FullBody/InWater/firing_water_right_up_01.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Player/FullBody/InWater/firing_water_right_up_02.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Player/FullBody/InWater/firing_water_right_01.png" type="Texture" id=21]
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "running_shoot",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "aiming_angled_shoot",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "aiming_up_shoot",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "running_down_shoot",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 1 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "running",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "under_water",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "up_on_shore",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "aiming_up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "aiming_angled",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "idle_in_water",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "aimig_down",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "running_angled_shoot",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "none",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 21 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "in_water_shoot",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 18 ) ],
+"loop": true,
+"name": "in_water_up_shoot",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 19 ), ExtResource( 20 ) ],
+"loop": true,
+"name": "in_water_angled_shoot",
+"speed": 5.0
+} ]

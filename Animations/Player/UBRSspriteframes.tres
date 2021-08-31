@@ -1,0 +1,22 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Player/UpperBody/Running/lance_walking_r_frame_3_upper.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Player/UpperBody/Running/lance_walking_r_frame_0_upper.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Player/UpperBody/Running/lance_walking_r_frame_1_upper.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Player/UpperBody/Running/lance_walking_r_frame_4_upper.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Player/UpperBody/Running/lance_walking_r_frame_5_upper.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Player/UpperBody/Running/lance_walking_r_frame_2_upper.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Player/UpperBody/standing_upper_idle_centered.png" type="Texture" id=7]
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 1 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "running",
+"speed": 5.0
+} ]

@@ -1,0 +1,335 @@
+[gd_scene load_steps=55 format=2]
+
+[ext_resource path="res://Shader/TrousersColor.tres" type="Material" id=1]
+[ext_resource path="res://Scripts/Player/StateMachinePlayer.gd" type="Script" id=2]
+[ext_resource path="res://Animations/Player/UpperBody/idle.tres" type="Animation" id=3]
+[ext_resource path="res://Animations/Player/LowerBody/LowerBodySpriteframes.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://Animations/Player/FullBody/crouching.tres" type="Animation" id=5]
+[ext_resource path="res://Animations/Player/LowerBody/idle.tres" type="Animation" id=6]
+[ext_resource path="res://Animations/Player/LowerBody/running.tres" type="Animation" id=7]
+[ext_resource path="res://Animations/Player/UpperBody/UpperBodySpriteframes.tres" type="SpriteFrames" id=8]
+[ext_resource path="res://Animations/Player/UpperBody/aiming_down.tres" type="Animation" id=9]
+[ext_resource path="res://Animations/Player/UpperBody/aiming_angled.tres" type="Animation" id=10]
+[ext_resource path="res://Animations/Player/FullBody/falling.tres" type="Animation" id=11]
+[ext_resource path="res://Animations/Player/FullBody/jumping.tres" type="Animation" id=12]
+[ext_resource path="res://Scripts/Player/Animation/UpperBodyAP.gd" type="Script" id=13]
+[ext_resource path="res://Animations/Player/FullBody/FullBodySpriteframes.tres" type="SpriteFrames" id=14]
+[ext_resource path="res://Scripts/Player/Motion/InWater/PlayerSwimmingState.gd" type="Script" id=15]
+[ext_resource path="res://Animations/Player/UpperBody/idle_in_water.tres" type="Animation" id=16]
+[ext_resource path="res://Animations/Player/UpperBody/running.tres" type="Animation" id=17]
+[ext_resource path="res://Animations/Player/FullBody/diving.tres" type="Animation" id=18]
+[ext_resource path="res://Scripts/Player/Animation/FullBodyAP.gd" type="Script" id=19]
+[ext_resource path="res://Animations/Player/UpperBody/up_on_shore.tres" type="Animation" id=20]
+[ext_resource path="res://Scripts/AnimationController.gd" type="Script" id=21]
+[ext_resource path="res://Animations/Player/LowerBody/none.tres" type="Animation" id=22]
+[ext_resource path="res://Scripts/Player/Motion/PlayerClimbingState.gd" type="Script" id=23]
+[ext_resource path="res://Scripts/Player/Animation/UpperBody.gd" type="Script" id=24]
+[ext_resource path="res://Animations/Player/UpperBody/under_water.tres" type="Animation" id=25]
+[ext_resource path="res://Scripts/Player/Body.gd" type="Script" id=26]
+[ext_resource path="res://Animations/Player/FullBody/none.tres" type="Animation" id=27]
+[ext_resource path="res://Animations/Player/LowerBody/swimming.tres" type="Animation" id=28]
+[ext_resource path="res://Animations/Player/UpperBody/running_shoot.tres" type="Animation" id=29]
+[ext_resource path="res://Animations/Player/UpperBody/aiming_up.tres" type="Animation" id=30]
+[ext_resource path="res://Animations/Player/UpperBody/idle_shoot.tres" type="Animation" id=31]
+[ext_resource path="res://Animations/Player/UpperBody/running_angled_shoot.tres" type="Animation" id=32]
+[ext_resource path="res://Animations/Player/UpperBody/running_down_shoot.tres" type="Animation" id=33]
+[ext_resource path="res://Animations/Player/UpperBody/aiming_up_shoot.tres" type="Animation" id=34]
+[ext_resource path="res://Shader/TrousersColor.shader" type="Shader" id=35]
+[ext_resource path="res://Scripts/Player/Motion/OnGround/PlayerIdleState.gd" type="Script" id=36]
+[ext_resource path="res://Scripts/Player/Motion/OnGround/PlayerRunningState.gd" type="Script" id=37]
+[ext_resource path="res://Scripts/Player/Player.gd" type="Script" id=38]
+[ext_resource path="res://Scripts/Debug/DebugInfo.gd" type="Script" id=39]
+[ext_resource path="res://Fonts/Godot-Fontpack-d244bf6170b399a6d4d26a0d906058ddf2dafdf1/fonts/poco/Poco.ttf" type="DynamicFontData" id=40]
+[ext_resource path="res://Scripts/Player/Motion/InAir/PlayerJumpingState.gd" type="Script" id=41]
+[ext_resource path="res://Scripts/Player/Motion/OnGround/PlayerCrouchingState.gd" type="Script" id=42]
+[ext_resource path="res://Scripts/Player/Motion/InAir/PlayerFallingState.gd" type="Script" id=43]
+[ext_resource path="res://Animations/Player/UpperBody/in_water_shoot.tres" type="Animation" id=44]
+[ext_resource path="res://Scripts/Player/Animation/LowerBodyAP.gd" type="Script" id=45]
+[ext_resource path="res://Animations/Player/UpperBody/in_water_up_shoot.tres" type="Animation" id=46]
+[ext_resource path="res://Animations/Player/UpperBody/in_water_angled_shoot.tres" type="Animation" id=47]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 1 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+[sub_resource type="DynamicFont" id=3]
+size = 10
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_char = 1
+font_data = ExtResource( 40 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 35 )
+shader_param/is_player_two = false
+
+[sub_resource type="Animation" id=6]
+resource_name = "none"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "none" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "crouching_shoot"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "crouching_shoot" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 11 ), Vector2( 0, 10 ) ]
+}
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 5, 12 )
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 38 )
+
+[node name="StateMachinePlayer" type="Node" parent="."]
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": "Default state is StateTypes.IDLE"
+}
+
+[node name="Idle" type="Node" parent="StateMachinePlayer"]
+script = ExtResource( 36 )
+__meta__ = {
+"_editor_description_": "State IDLE (StateTypes : 1)"
+}
+stateType = 1
+
+[node name="Running" type="Node" parent="StateMachinePlayer"]
+script = ExtResource( 37 )
+stateType = 2
+
+[node name="Jumping" type="Node" parent="StateMachinePlayer"]
+script = ExtResource( 41 )
+__meta__ = {
+"_editor_description_": ""
+}
+stateType = 3
+
+[node name="Falling" type="Node" parent="StateMachinePlayer"]
+script = ExtResource( 43 )
+stateType = 4
+
+[node name="Crouching" type="Node" parent="StateMachinePlayer"]
+script = ExtResource( 42 )
+stateType = 5
+
+[node name="Swimming" type="Node" parent="StateMachinePlayer"]
+script = ExtResource( 15 )
+stateType = 6
+
+[node name="Climbing" type="Node" parent="StateMachinePlayer"]
+script = ExtResource( 23 )
+stateType = 7
+
+[node name="AnimationController" type="Node" parent="."]
+script = ExtResource( 21 )
+
+[node name="FeetBox" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, 18 )
+shape = SubResource( 1 )
+
+[node name="HurtBox" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 2 )
+disabled = true
+
+[node name="DebugInfo" type="VBoxContainer" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -38.0
+margin_right = -6.0
+margin_bottom = -8.0
+theme = SubResource( 4 )
+custom_constants/separation = -3
+script = ExtResource( 39 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+StateMachine = NodePath("../StateMachinePlayer")
+
+[node name="StateLabel" type="Label" parent="DebugInfo"]
+margin_right = 14.0
+margin_bottom = 12.0
+
+[node name="DirectionLabel" type="Label" parent="DebugInfo"]
+margin_top = 9.0
+margin_right = 14.0
+margin_bottom = 21.0
+
+[node name="PositionLabel" type="Label" parent="DebugInfo"]
+margin_top = 18.0
+margin_right = 14.0
+margin_bottom = 30.0
+
+[node name="Body" type="Node2D" parent="."]
+script = ExtResource( 26 )
+
+[node name="LowerBody" type="AnimatedSprite" parent="Body"]
+material = ExtResource( 1 )
+position = Vector2( 0, 10 )
+frames = ExtResource( 4 )
+animation = "running"
+frame = 1
+
+[node name="LowerBodyAP" type="AnimationPlayer" parent="Body/LowerBody"]
+anims/idle = ExtResource( 6 )
+anims/none = ExtResource( 22 )
+anims/running = ExtResource( 7 )
+anims/swimming = ExtResource( 28 )
+script = ExtResource( 45 )
+
+[node name="UpperBody" type="AnimatedSprite" parent="Body"]
+material = SubResource( 5 )
+position = Vector2( 0, -6 )
+frames = ExtResource( 8 )
+animation = "idle_in_water"
+script = ExtResource( 24 )
+
+[node name="UpperBodyAP" type="AnimationPlayer" parent="Body/UpperBody"]
+anims/aiming_angled = ExtResource( 10 )
+anims/aiming_down = ExtResource( 9 )
+anims/aiming_up = ExtResource( 30 )
+anims/aiming_up_shoot = ExtResource( 34 )
+anims/idle = ExtResource( 3 )
+anims/idle_in_water = ExtResource( 16 )
+anims/idle_shoot = ExtResource( 31 )
+anims/in_water_angled_shoot = ExtResource( 47 )
+anims/in_water_shoot = ExtResource( 44 )
+anims/in_water_up_shoot = ExtResource( 46 )
+anims/none = SubResource( 6 )
+anims/running = ExtResource( 17 )
+anims/running_angled_shoot = ExtResource( 32 )
+anims/running_down_shoot = ExtResource( 33 )
+anims/running_shoot = ExtResource( 29 )
+anims/under_water = ExtResource( 25 )
+anims/up_on_shore = ExtResource( 20 )
+script = ExtResource( 13 )
+
+[node name="FullBody" type="AnimatedSprite" parent="Body"]
+visible = false
+material = ExtResource( 1 )
+position = Vector2( 0, 13 )
+frames = ExtResource( 14 )
+animation = "diving"
+
+[node name="FullBodyAP" type="AnimationPlayer" parent="Body/FullBody"]
+anims/crouching = ExtResource( 5 )
+anims/crouching_shoot = SubResource( 7 )
+anims/diving = ExtResource( 18 )
+anims/falling = ExtResource( 11 )
+anims/jumping = ExtResource( 12 )
+anims/none = ExtResource( 27 )
+script = ExtResource( 19 )
+
+[node name="Rays" type="Node2D" parent="."]
+visible = false
+
+[node name="GroundCheckers" type="Node2D" parent="Rays"]
+visible = false
+
+[node name="GroundChecker1" type="RayCast2D" parent="Rays/GroundCheckers"]
+visible = false
+position = Vector2( -4, 18 )
+scale = Vector2( 4, 1 )
+enabled = true
+cast_to = Vector2( 0, 2 )
+collision_mask = 2
+
+[node name="GroundChecker2" type="RayCast2D" parent="Rays/GroundCheckers"]
+visible = false
+position = Vector2( 4, 18 )
+scale = Vector2( 4, 1 )
+enabled = true
+cast_to = Vector2( 0, 2 )
+collision_mask = 2
+
+[node name="WaterChecker" type="RayCast2D" parent="Rays"]
+visible = false
+position = Vector2( 0, 17 )
+cast_to = Vector2( 0, 10 )
+collision_mask = 6
+
+[node name="ShoreChecker_old" type="RayCast2D" parent="Rays"]
+visible = false
+position = Vector2( 16, 12 )
+rotation = 1.5708
+scale = Vector2( 8, 8 )
+exclude_parent = false
+cast_to = Vector2( 0, 1 )
+collision_mask = 2147483651
+
+[node name="ClosestSurfaceChecker" type="RayCast2D" parent="Rays"]
+cast_to = Vector2( 0, 224 )
+collision_mask = 2
+
+[node name="BulletSpawnPoint" type="Position2D" parent="."]
+position = Vector2( 16, -4 )
+
+[node name="FireRateTimer" type="Timer" parent="."]
+one_shot = true

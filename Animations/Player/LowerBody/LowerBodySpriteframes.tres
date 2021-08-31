@@ -1,0 +1,37 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Player/LowerBody/lance_walking_r_frame_1_lower.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Player/LowerBody/lance_walking_r_frame_0_lower.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Player/LowerBody/lance_walking_r_frame_5_lower.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Player/LowerBody/lance_walking_r_frame_4_lower.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Player/LowerBody/lance_walking_r_frame_3_lower.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Player/LowerBody/lance_walking_r_frame_2_lower.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Player/FullBody/InWater/drowning_02.png" type="Texture" id=7]
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "running",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "under_water",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "swimming",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "none",
+"speed": 5.0
+} ]
