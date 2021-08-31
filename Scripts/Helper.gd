@@ -34,6 +34,7 @@ static func Equal(rhs : float, lhs : float, epsilon : float = 0.001):
 static func IsObjectHitLayer(object : Object, point : Vector2, bit : int) -> bool:
 	var spaceState = object.get_world_2d().direct_space_state
 	var results = spaceState.intersect_point(point, 1, [], bit)
+	#print(point)
 	return results.size() > 0
 
 static func IsStraightDirection(direction : int) -> bool:

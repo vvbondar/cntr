@@ -186,7 +186,6 @@ stateType = 7
 script = ExtResource( 21 )
 
 [node name="FeetBox" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, 18 )
 shape = SubResource( 1 )
 
@@ -291,10 +290,8 @@ script = ExtResource( 19 )
 visible = false
 
 [node name="GroundCheckers" type="Node2D" parent="Rays"]
-visible = false
 
 [node name="GroundChecker1" type="RayCast2D" parent="Rays/GroundCheckers"]
-visible = false
 position = Vector2( -4, 18 )
 scale = Vector2( 4, 1 )
 enabled = true
@@ -302,7 +299,6 @@ cast_to = Vector2( 0, 2 )
 collision_mask = 2
 
 [node name="GroundChecker2" type="RayCast2D" parent="Rays/GroundCheckers"]
-visible = false
 position = Vector2( 4, 18 )
 scale = Vector2( 4, 1 )
 enabled = true
@@ -310,7 +306,6 @@ cast_to = Vector2( 0, 2 )
 collision_mask = 2
 
 [node name="WaterChecker" type="RayCast2D" parent="Rays"]
-visible = false
 position = Vector2( 0, 17 )
 cast_to = Vector2( 0, 10 )
 collision_mask = 6
@@ -333,3 +328,7 @@ position = Vector2( 16, -4 )
 
 [node name="FireRateTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Feet" type="Position2D" parent="."]
+visible = false
+position = Vector2( 0, 19 )

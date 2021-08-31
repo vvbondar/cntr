@@ -13,6 +13,7 @@ func _ready():
 	timer.connect("timeout", self, "OnRepeat")
 	add_child(timer)
 
+
 func OnPlayerBodyAnimationChanged(_bodyPart : int, _animationName : String, _forced : bool):
 	if ac.currentState != StateTypes.SWIMMING:
 		timer.stop()

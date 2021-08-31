@@ -58,6 +58,7 @@ func _physics_process(_delta):
 	HandleInWaterShootFlipPosition()
 	#print(asm.get("parameters/playback").get_current_node())
 	#print(lowerBodyAP.get_parent().position.x)	
+	#print(current_animation)
 
 func HandleInWaterShootFlipPosition() -> void:
 	var body_upper = get_parent()

@@ -24,6 +24,7 @@ onready var currentLevel : Node2D = get_node("../../")
 
 onready var bulletSpawnPoint = $BulletSpawnPoint
 onready var ac = $AnimationController
+onready var feetBox = $Feet
 
 var currentUpperBodyAnimation : String = ""
 
@@ -51,19 +52,21 @@ var bulletCountMap = {
 #const BULLET_SCENE = preload("res://Scenes/Bullet.tscn")
 
 func Init(isPlayerOne : bool = true) -> Object:	
+	ConnectSignals()
+	
 	SetIsPlayerTwo(!isPlayerOne)
 	playerIdx = int(!isPlayerOne)
 	
-	SetCollisionLayerBitEnabled(GlobalConstants.LAYER_GENERAL_MASK_BIT, true)
+	#set_collision_mask_bit(10, true)
+
+	#SetCollisionLayerBitEnabled(GlobalConstants.LAYER_PLAYER_ONE, true)
 	
 	SetCollisionMaskBitEnabled(GlobalConstants.LAYER_GENERAL_MASK_BIT, true)
 	SetCollisionMaskBitEnabled(GlobalConstants.LAYER_PLATFORMS_MASK_BIT, true)
 	SetCollisionMaskBitEnabled(GlobalConstants.LAYER_WATER_MASK_BIT, true)
 	SetCollisionMaskBitEnabled(GlobalConstants.LAYER_KILLBOX_MASK_BIT, true)
 	
-	
 	OnBodyFlipChanged($Body/FullBody.flip_h)
-	ConnectSignals()
 	
 	return self
 
@@ -146,7 +149,14 @@ func _physics_process(delta):
 	CheckShore()
 	HandleShooting()
 	
-	#print(IsOnSurface(WorldAreas.PLATFORMS))
+	#print(get_slide_count())
+	print("P: " + str(IsOnSurface(WorldAreas.PLATFORMS)))
+	print("W: " + str(IsOnSurface(WorldAreas.WATER)))
+	#print(str(IsOnSurface(WorldAreas.KILLBOX)))
+	#print(isOnOneWayPlatform)
+	#print(global_position.y)
+	
+	#print($FeetBox.global_position)
 	
 	PrintDebugInfo()
 	
@@ -391,15 +401,17 @@ func PrintDebugInfo():
 	debugInfo.SetDirectionString(playerVelocity)
 	
 func IsOnSurface(surface : int) -> bool:
+	#print(feetBox.visible)
+	
 	var retValue = false
 	
 	match surface:
 		WorldAreas.PLATFORMS:
-			return Helper.IsObjectHitLayer(self, $FeetBox.global_position, GlobalConstants.LAYER_PLATFORMS_MASK_BIT)
+			return Helper.IsObjectHitLayer(self, feetBox.global_position, GlobalConstants.LAYER_PLATFORMS_MASK_BIT)
 		WorldAreas.WATER:
-			return Helper.IsObjectHitLayer(self, $FeetBox.global_position + Vector2(0.0, 4.0), GlobalConstants.LAYER_WATER_MASK_BIT)
+			return Helper.IsObjectHitLayer(self, feetBox.global_position + Vector2(0.0, 4.0), GlobalConstants.LAYER_WATER_MASK_BIT)
 		WorldAreas.KILLBOX:
-			return Helper.IsObjectHitLayer(self, $FeetBox.global_position, GlobalConstants.LAYER_KILLBOX_MASK_BIT)
+			return Helper.IsObjectHitLayer(self, feetBox.global_position, GlobalConstants.LAYER_KILLBOX_MASK_BIT)
 			
 	return retValue
 
@@ -416,7 +428,7 @@ func CheckShore() -> void:
 			ray.enabled = false
 
 func CheckCurrentPlatform() -> void:
-	yield(get_tree().root, "ready")
+	#yield(get_tree().root, "ready")
 	
 	if not fsm.CurrentStateIs(StateTypes.SWIMMING):
 		for groundChecker in $Rays/GroundCheckers.get_children():
@@ -450,6 +462,20 @@ func SetInputAllowed(value : bool) -> void:
 
 func SetCollisionMaskBitEnabled(layer : int, value : bool) -> void:
 	set_collision_mask_bit(layer, value)
+	
+	var s : String
+	for i in range(20):
+		s += str((get_collision_mask() >> (19 - i)) & 1)
+		
+	print_debug(s)
+	
+	#print_debug(layer)
+	
+	#var mask = get_collision_mask()
+	
+	#mask ^= (-int(value) ^ mask) & (1 << layer)
+	
+	#set_collision_mask(mask)
 	
 func SetCollisionLayerBitEnabled(layer : int, value : bool) -> void:
 	set_collision_layer_bit(layer, value)
