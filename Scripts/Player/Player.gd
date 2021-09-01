@@ -24,7 +24,8 @@ onready var currentLevel : Node2D = get_node("../../")
 
 onready var bulletSpawnPoint = $BulletSpawnPoint
 onready var ac = $AnimationController
-onready var feetBox = $Feet
+onready var feetBox = $FeetBox
+onready var groundCheckers = $Rays/GroundCheckers
 
 var currentUpperBodyAnimation : String = ""
 
@@ -59,12 +60,14 @@ func Init(isPlayerOne : bool = true) -> Object:
 	
 	#set_collision_mask_bit(10, true)
 
-	#SetCollisionLayerBitEnabled(GlobalConstants.LAYER_PLAYER_ONE, true)
+	#SetCollisionLayerBitEnabled(GlobalConstants.LAYER_GENERAL_MASK_BIT, true)
+	#SetCollisionLayerBitEnabled(GlobalConstants.LAYER_PLATFORMS_MASK_BIT, true)
 	
-	SetCollisionMaskBitEnabled(GlobalConstants.LAYER_GENERAL_MASK_BIT, true)
-	SetCollisionMaskBitEnabled(GlobalConstants.LAYER_PLATFORMS_MASK_BIT, true)
-	SetCollisionMaskBitEnabled(GlobalConstants.LAYER_WATER_MASK_BIT, true)
-	SetCollisionMaskBitEnabled(GlobalConstants.LAYER_KILLBOX_MASK_BIT, true)
+	
+	#SetCollisionMaskBitEnabled(GlobalConstants.LAYER_GENERAL_MASK_BIT, true)
+	#SetCollisionMaskBitEnabled(GlobalConstants.LAYER_PLATFORMS_MASK_BIT, true)
+	#SetCollisionMaskBitEnabled(GlobalConstants.LAYER_WATER_MASK_BIT, true)
+	#SetCollisionMaskBitEnabled(GlobalConstants.LAYER_KILLBOX_MASK_BIT, true)
 	
 	OnBodyFlipChanged($Body/FullBody.flip_h)
 	
@@ -431,9 +434,13 @@ func CheckCurrentPlatform() -> void:
 	#yield(get_tree().root, "ready")
 	
 	if not fsm.CurrentStateIs(StateTypes.SWIMMING):
-		for groundChecker in $Rays/GroundCheckers.get_children():
+		for groundChecker in groundCheckers.get_children():
 			if groundChecker.is_colliding():
 				var collider = groundChecker.get_collider()
+				
+				if collider == self:
+					return
+				
 				var colliderShapeIdx = groundChecker.get_collider_shape()
 				if lastCollisionShapeIdx != colliderShapeIdx:
 					lastCollisionShapeIdx = colliderShapeIdx
